@@ -1,4 +1,5 @@
 import { Database, GitBranch, Hash, FileText } from "lucide-react";
+import { ConnectedApps } from "@/components/ConnectedApps";
 
 export const ToolHeader = () => {
   return (
@@ -31,8 +32,9 @@ export const ToolHeader = () => {
           </div>
         </div>
         
-        <div className="flex items-center gap-2">
-          <span className="text-xs font-mono text-muted-foreground">CTB-TOOLBOX-SHELL</span>
+        <div className="flex items-center gap-4">
+          <span className="text-xs font-mono text-muted-foreground hidden md:inline">CTB-TOOLBOX-SHELL</span>
+          <ConnectedApps />
         </div>
       </div>
     </header>
