@@ -1,99 +1,74 @@
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Send } from "lucide-react";
-import { toast } from "sonner";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { ExternalLink, ArrowRight, Activity } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export const RouterTool = () => {
-  const handleSendPayload = () => {
-    toast.success("Payload routed successfully", {
-      description: "Data forwarded to validator"
-    });
+  const navigate = useNavigate();
+
+  const handleLaunch = () => {
+    navigate("/embed/router");
   };
 
   return (
     <div className="space-y-6">
-      <div className="rounded-lg border border-tool-router/20 bg-tool-router/5 p-6">
-        <div className="grid gap-4 md:grid-cols-2">
-          <div className="space-y-2">
-            <Label htmlFor="input-type">Input Type</Label>
-            <Select>
-              <SelectTrigger id="input-type">
-                <SelectValue placeholder="Select input type" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="file">File Upload</SelectItem>
-                <SelectItem value="json">JSON Payload</SelectItem>
-                <SelectItem value="api">API Request</SelectItem>
-              </SelectContent>
-            </Select>
+      {/* Launcher Card */}
+      <Card className="border-tool-router/30 bg-tool-router/5">
+        <CardHeader>
+          <CardTitle className="text-tool-router">Router Workbench</CardTitle>
+          <CardDescription>
+            Full-featured intake router for tagging payloads and forwarding to correct destinations. 
+            Supports file uploads, JSON payloads, and API requests with intelligent routing logic.
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="grid gap-4 md:grid-cols-3">
+            <div className="flex items-center gap-3 p-3 rounded-lg bg-card border">
+              <Activity className="h-5 w-5 text-tool-router" />
+              <div>
+                <div className="text-sm font-medium">Active Routes</div>
+                <div className="text-xs text-muted-foreground">3 destinations</div>
+              </div>
+            </div>
+            <div className="flex items-center gap-3 p-3 rounded-lg bg-card border">
+              <Activity className="h-5 w-5 text-tool-router" />
+              <div>
+                <div className="text-sm font-medium">Today's Activity</div>
+                <div className="text-xs text-muted-foreground">12 payloads routed</div>
+              </div>
+            </div>
+            <div className="flex items-center gap-3 p-3 rounded-lg bg-card border">
+              <Activity className="h-5 w-5 text-tool-router" />
+              <div>
+                <div className="text-sm font-medium">Success Rate</div>
+                <div className="text-xs text-muted-foreground">98.5%</div>
+              </div>
+            </div>
           </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="destination">Destination</Label>
-            <Select>
-              <SelectTrigger id="destination">
-                <SelectValue placeholder="Select destination" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="validator">Validator</SelectItem>
-                <SelectItem value="n8n">n8n Workflow</SelectItem>
-                <SelectItem value="sheets">Google Sheets</SelectItem>
-              </SelectContent>
-            </Select>
+          <div className="flex gap-3">
+            <Button 
+              className="flex-1 bg-tool-router text-tool-router-foreground hover:bg-tool-router/90 gap-2"
+              onClick={handleLaunch}
+            >
+              Launch Router Workbench
+              <ArrowRight className="h-4 w-4" />
+            </Button>
+            <Button 
+              variant="outline"
+              className="gap-2 border-tool-router/30 hover:bg-tool-router/10"
+              onClick={() => window.open("https://messyflow-workbench.lovable.app", "_blank")}
+            >
+              <ExternalLink className="h-4 w-4" />
+              Open in New Tab
+            </Button>
           </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="batch-id">Batch ID</Label>
-            <Input id="batch-id" placeholder="Auto-generated" disabled />
-          </div>
-
-          <div className="space-y-2">
-            <Label htmlFor="source-entity">Source Entity</Label>
-            <Input id="source-entity" placeholder="Enter source entity" />
-          </div>
-        </div>
-
-        <Button 
-          className="mt-4 bg-tool-router text-tool-router-foreground hover:bg-tool-router/90"
-          onClick={handleSendPayload}
-        >
-          <Send className="mr-2 h-4 w-4" />
-          Send Payload
-        </Button>
-      </div>
-
-      <div className="rounded-lg border bg-card">
-        <div className="border-b bg-muted/50 px-4 py-3">
-          <h3 className="text-sm font-semibold">Recent Router Logs</h3>
-        </div>
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Timestamp</TableHead>
-              <TableHead>Batch ID</TableHead>
-              <TableHead>Source</TableHead>
-              <TableHead>Destination</TableHead>
-              <TableHead>Status</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            <TableRow>
-              <TableCell className="font-mono text-xs">2025-11-10 14:23:01</TableCell>
-              <TableCell className="font-mono text-xs">BTX-20251110-001</TableCell>
-              <TableCell>API Upload</TableCell>
-              <TableCell>Validator</TableCell>
-              <TableCell>
-                <span className="inline-flex items-center rounded-full bg-green-100 px-2 py-1 text-xs font-medium text-green-700">
-                  Success
-                </span>
-              </TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
-      </div>
+          <p className="text-xs text-muted-foreground">
+            The Router Workbench runs as a standalone application with its own interface and backend integration.
+          </p>
+        </CardContent>
+      </Card>
     </div>
   );
 };

@@ -21,10 +21,35 @@ interface ConnectedApp {
   description?: string;
 }
 
+const PRESET_APPS: ConnectedApp[] = [
+  {
+    id: "router",
+    name: "Router - Messy Logic",
+    url: "https://messyflow-workbench.lovable.app",
+    description: "Intake router — tags payloads and forwards to correct destination"
+  }
+];
+
 export const ConnectedApps = () => {
   const [apps, setApps] = useState<ConnectedApp[]>(() => {
     const stored = localStorage.getItem("connected-apps");
-    return stored ? JSON.parse(stored) : [];
+    if (stored) {
+      const parsedApps = JSON.parse(stored);
+      // Auto-initialize preset apps if they don't exist
+      const presetIds = PRESET_APPS.map(app => app.id);
+      const existingIds = parsedApps.map((app: ConnectedApp) => app.id);
+      const missingPresets = PRESET_APPS.filter(preset => !existingIds.includes(preset.id));
+      
+      if (missingPresets.length > 0) {
+        const updatedApps = [...missingPresets, ...parsedApps];
+        localStorage.setItem("connected-apps", JSON.stringify(updatedApps));
+        return updatedApps;
+      }
+      return parsedApps;
+    }
+    // First time initialization
+    localStorage.setItem("connected-apps", JSON.stringify(PRESET_APPS));
+    return PRESET_APPS;
   });
   const [newApp, setNewApp] = useState({ name: "", url: "", description: "" });
   const [isAddingApp, setIsAddingApp] = useState(false);
@@ -60,6 +85,17 @@ export const ConnectedApps = () => {
   };
 
   const removeApp = (id: string) => {
+    // Prevent removal of preset apps
+    const isPreset = PRESET_APPS.some(preset => preset.id === id);
+    if (isPreset) {
+      toast({
+        title: "Cannot remove preset app",
+        description: "This is a built-in spoke application",
+        variant: "destructive",
+      });
+      return;
+    }
+    
     saveApps(apps.filter((app) => app.id !== id));
     toast({
       title: "App removed",
@@ -149,14 +185,16 @@ export const ConnectedApps = () => {
                         )}
                         <p className="text-xs text-muted-foreground mt-1 break-all">{app.url}</p>
                       </div>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => removeApp(app.id)}
-                        className="text-destructive hover:text-destructive hover:bg-destructive/10"
-                      >
-                        <Trash2 className="h-4 w-4" />
-                      </Button>
+                      {!PRESET_APPS.some(preset => preset.id === app.id) && (
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => removeApp(app.id)}
+                          className="text-destructive hover:text-destructive hover:bg-destructive/10"
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      )}
                     </div>
                     <div className="flex gap-2">
                       <Button
@@ -172,7 +210,9 @@ export const ConnectedApps = () => {
                         variant="outline"
                         size="sm"
                         className="flex-1 gap-2"
-                        onClick={() => window.location.href = `/embed/${app.id}`}
+                        onClick={() => {
+                          window.location.href = `/embed/${app.id}`;
+                        }}
                       >
                         View Embedded
                       </Button>
