@@ -7,7 +7,7 @@ export const RouterTool = () => {
   const navigate = useNavigate();
 
   const handleLaunch = () => {
-    navigate("/embed/router");
+    navigate("/router");
   };
 
   return (
@@ -46,26 +46,16 @@ export const RouterTool = () => {
             </div>
           </div>
 
-          <div className="flex gap-3">
-            <Button 
-              className="flex-1 bg-tool-router text-tool-router-foreground hover:bg-tool-router/90 gap-2"
-              onClick={handleLaunch}
-            >
-              Launch Router Workbench
-              <ArrowRight className="h-4 w-4" />
-            </Button>
-            <Button 
-              variant="outline"
-              className="gap-2 border-tool-router/30 hover:bg-tool-router/10"
-              onClick={() => window.open("https://messyflow-workbench.lovable.app", "_blank")}
-            >
-              <ExternalLink className="h-4 w-4" />
-              Open in New Tab
-            </Button>
-          </div>
+          <Button 
+            className="w-full bg-tool-router text-tool-router-foreground hover:bg-tool-router/90 gap-2"
+            onClick={handleLaunch}
+          >
+            Launch Router Workbench
+            <ArrowRight className="h-4 w-4" />
+          </Button>
 
           <p className="text-xs text-muted-foreground">
-            The Router Workbench runs as a standalone application with its own interface and backend integration.
+            Native validation safety net for your entire data pipeline. Route invalid data, enable human review, and track with HEIR/Process IDs.
           </p>
         </CardContent>
       </Card>
