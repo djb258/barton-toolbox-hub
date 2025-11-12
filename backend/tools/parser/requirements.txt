@@ -1,0 +1,47 @@
+# ==========================================
+# Parser Tool Dependencies
+# ==========================================
+
+# Core Framework
+fastapi==0.109.0
+uvicorn[standard]==0.27.0
+python-multipart==0.0.6
+pydantic>=2.5.0
+
+# Database
+asyncpg>=0.29.0              # Async PostgreSQL (Neon)
+psycopg2-binary>=2.9.9       # PostgreSQL adapter
+
+# HTTP & Webhooks
+httpx>=0.25.0                # Async HTTP client (n8n webhooks)
+
+# Firebase (Optional)
+firebase-admin>=6.3.0
+
+# Utilities
+python-dotenv==1.0.0         # Environment variables
+aiofiles==23.2.1             # Async file operations
+python-json-logger>=2.0.7    # Structured logging
+
+# ==========================================
+# OCR Dependencies (Optional)
+# ==========================================
+# Uncomment if using DeepSeek-OCR
+
+# torch>=2.0.0
+# torchvision>=0.15.0
+# transformers>=4.35.0
+# pillow>=10.0.0
+# numpy>=1.24.0
+# opencv-python>=4.8.0
+
+# ==========================================
+# PDF Processing (Optional)
+# ==========================================
+# Uncomment if processing PDF files directly
+
+# pypdf2>=3.0.0
+# pdf2image>=1.16.3
+# pytesseract>=0.3.10
+# pdfplumber>=0.10.3
+# pymupdf>=1.23.0
