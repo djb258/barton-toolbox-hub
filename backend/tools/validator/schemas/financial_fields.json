@@ -1,0 +1,91 @@
+{
+  "schema_id": "financial_fields",
+  "name": "Financial Fields Validation",
+  "description": "Validation rules for financial and coverage amounts",
+  "rules": [
+    {
+      "rule_id": "stop_loss_deductible_type",
+      "field": "stop_loss_deductible",
+      "rule_type": "type",
+      "severity": "error",
+      "params": {
+        "expected_type": "number"
+      }
+    },
+    {
+      "rule_id": "stop_loss_deductible_range",
+      "field": "stop_loss_deductible",
+      "rule_type": "range",
+      "severity": "error",
+      "params": {
+        "min": 0,
+        "max": 10000000
+      }
+    },
+    {
+      "rule_id": "monthly_premium_type",
+      "field": "monthly_premium",
+      "rule_type": "type",
+      "severity": "error",
+      "params": {
+        "expected_type": "number"
+      }
+    },
+    {
+      "rule_id": "monthly_premium_range",
+      "field": "monthly_premium",
+      "rule_type": "range",
+      "severity": "error",
+      "params": {
+        "min": 0,
+        "max": 1000000
+      }
+    },
+    {
+      "rule_id": "annual_premium_type",
+      "field": "annual_premium",
+      "rule_type": "type",
+      "severity": "warning",
+      "params": {
+        "expected_type": "number"
+      }
+    },
+    {
+      "rule_id": "aggregate_limit_type",
+      "field": "aggregate_limit",
+      "rule_type": "type",
+      "severity": "error",
+      "params": {
+        "expected_type": "number"
+      }
+    },
+    {
+      "rule_id": "aggregate_limit_range",
+      "field": "aggregate_limit",
+      "rule_type": "range",
+      "severity": "warning",
+      "params": {
+        "min": 0,
+        "max": 100000000
+      }
+    },
+    {
+      "rule_id": "corridor_deductible_type",
+      "field": "corridor_deductible",
+      "rule_type": "type",
+      "severity": "error",
+      "params": {
+        "expected_type": "number"
+      }
+    },
+    {
+      "rule_id": "max_benefit_type",
+      "field": "max_benefit",
+      "rule_type": "type",
+      "severity": "warning",
+      "params": {
+        "expected_type": "number"
+      }
+    }
+  ]
+}

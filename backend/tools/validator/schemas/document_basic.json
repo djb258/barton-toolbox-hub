@@ -1,0 +1,55 @@
+{
+  "schema_id": "document_basic",
+  "name": "Basic Document Validation",
+  "description": "Basic validation rules for parsed documents",
+  "rules": [
+    {
+      "rule_id": "doc_id_required",
+      "field": "doc_id",
+      "rule_type": "required",
+      "severity": "error",
+      "params": {}
+    },
+    {
+      "rule_id": "doc_id_type",
+      "field": "doc_id",
+      "rule_type": "type",
+      "severity": "error",
+      "params": {
+        "expected_type": "string"
+      }
+    },
+    {
+      "rule_id": "policy_number_required",
+      "field": "policy_number",
+      "rule_type": "required",
+      "severity": "error",
+      "params": {}
+    },
+    {
+      "rule_id": "policy_number_regex",
+      "field": "policy_number",
+      "rule_type": "regex",
+      "severity": "error",
+      "params": {
+        "pattern": "^[A-Z0-9-]+$"
+      }
+    },
+    {
+      "rule_id": "effective_date_required",
+      "field": "effective_date",
+      "rule_type": "required",
+      "severity": "error",
+      "params": {}
+    },
+    {
+      "rule_id": "effective_date_format",
+      "field": "effective_date",
+      "rule_type": "date_format",
+      "severity": "error",
+      "params": {
+        "format": "%Y-%m-%d"
+      }
+    }
+  ]
+}

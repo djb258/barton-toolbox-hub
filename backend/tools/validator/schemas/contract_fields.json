@@ -1,0 +1,107 @@
+{
+  "schema_id": "contract_fields",
+  "name": "Contract Fields Validation",
+  "description": "Validation rules for contract and coverage information",
+  "rules": [
+    {
+      "rule_id": "contract_type_enum",
+      "field": "contract_type",
+      "rule_type": "enum",
+      "severity": "error",
+      "params": {
+        "allowed_values": [
+          "ASO",
+          "Fully Insured",
+          "Level Funded",
+          "Self-Funded",
+          "Minimum Premium"
+        ]
+      }
+    },
+    {
+      "rule_id": "carrier_name_required",
+      "field": "carrier_name",
+      "rule_type": "required",
+      "severity": "warning",
+      "params": {}
+    },
+    {
+      "rule_id": "carrier_name_length",
+      "field": "carrier_name",
+      "rule_type": "length",
+      "severity": "error",
+      "params": {
+        "min": 2,
+        "max": 200
+      }
+    },
+    {
+      "rule_id": "tpa_name_length",
+      "field": "tpa_name",
+      "rule_type": "length",
+      "severity": "warning",
+      "params": {
+        "min": 2,
+        "max": 200
+      }
+    },
+    {
+      "rule_id": "network_type_enum",
+      "field": "network_type",
+      "rule_type": "enum",
+      "severity": "warning",
+      "params": {
+        "allowed_values": [
+          "PPO",
+          "HMO",
+          "EPO",
+          "POS",
+          "HDHP",
+          "Other"
+        ]
+      }
+    },
+    {
+      "rule_id": "coverage_level_enum",
+      "field": "coverage_level",
+      "rule_type": "enum",
+      "severity": "warning",
+      "params": {
+        "allowed_values": [
+          "Employee Only",
+          "Employee + Spouse",
+          "Employee + Children",
+          "Family",
+          "All Tiers"
+        ]
+      }
+    },
+    {
+      "rule_id": "plan_year_start_format",
+      "field": "plan_year_start",
+      "rule_type": "date_format",
+      "severity": "error",
+      "params": {
+        "format": "%Y-%m-%d"
+      }
+    },
+    {
+      "rule_id": "plan_year_end_format",
+      "field": "plan_year_end",
+      "rule_type": "date_format",
+      "severity": "error",
+      "params": {
+        "format": "%Y-%m-%d"
+      }
+    },
+    {
+      "rule_id": "renewal_date_format",
+      "field": "renewal_date",
+      "rule_type": "date_format",
+      "severity": "warning",
+      "params": {
+        "format": "%Y-%m-%d"
+      }
+    }
+  ]
+}
